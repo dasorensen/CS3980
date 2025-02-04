@@ -1,6 +1,9 @@
 def echo(text: str, repetitions: int = 3) -> str:
     """Imitate a real-world echo."""
-    pass  # replace this line with your code lines
+    for i in range(repetitions):
+        print(text[len(text) - (repetitions - i) :])
+
+    return "."
 
 
 if __name__ == "__main__":
