@@ -7,3 +7,4 @@ To simulate a real world echo, the code in echo.py uses a loop to print out subs
 
 ![Screenshot of echo code](https://github.com/user-attachments/assets/24eff7c1-bed6-4e08-b0a1-38b19ab2e5e1)
 
+![Screenshot of echo output](https://github.com/user-attachments/assets/4a11f9eb-3ebb-4625-b68b-b20fa86864b1)
