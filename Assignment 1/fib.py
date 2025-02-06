@@ -3,7 +3,7 @@ from time import time
 import matplotlib.pyplot as plt
 
 
-fib_timing = []
+fib_timing = []  # list to store timing of each function call
 
 
 def timer(func):
@@ -33,4 +33,5 @@ if __name__ == "__main__":
     plt.plot(n_range, fib_timing)
     plt.xlabel("n")
     plt.ylabel("Time [sec]")
+    plt.title("Execution Time of Each Fibonacci Number Calculation")
     plt.show()
