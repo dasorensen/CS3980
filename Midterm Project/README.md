@@ -34,3 +34,12 @@ To launch the web application:
 
 <br><br>
 Upon launching the web application, the following screen will appear:
+
+
+To start planning your workout, select the "Add New Exercise" button and the following window will appear:
+
+
+After entering your workout information and pressing the "save" button, your exercise will appear as part of a list on the main application page. You may continue to add exercises to the list as you desire. An example workout routine is shown here:
+
+
+From here, you may edit or delete any exercises that you wish using the "Edit" and "Delete" buttons. Pressing the "Delete" button will cause the exercise to be removed from your workout list. Pressing the "Edit" button will cause the following window to appear, allowing you to edit any details of the exercise: 
