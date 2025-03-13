@@ -69,6 +69,65 @@
   </div>
 </div>
 
+<!-- Modal  for editing a Workout-->
+<div
+class="modal fade"
+id="modal-edit"
+tabindex="-1"
+aria-labelledby="modal-title"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">
+        Edit Workout: <span id="workout-exercise"></span>
+      </h4>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form id="form-edit">
+        <label for="exercise-edit">Exercise Name</label>
+        <input id="exercise-edit" type="text" class="form-control" name="" />
+        <div id="msg"></div>
+
+        <div class="mb-3">
+          <label for="edit-sets" class="form-label"> Number of Sets </label>
+          <input type="int" class="form-control" id="edit-sets"/>
+        </div>
+        <div class="mb-3">
+          <label for="edit-reps" class="form-label"> Number of Reps </label>
+          <input type="int" class="form-control" id="edit-reps"/>
+        </div>
+        <div class="mb-3">
+          <label for="edit-notes" class="form-label"> Notes </label>
+          <textarea class="form-control" id="edit-notes" rows="2"></textarea>
+        </div>
+
+        <div class="mt-3">
+          <button
+            id="edit-close"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" id="edit" class="btn btn-primary">
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
     <table class="table">
         <thead>
           <tr>
@@ -76,6 +135,7 @@
             <th scope="col">Sets</th>
             <th scope="col">Reps</th>
             <th scope="col">Notes</th>
+            <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>

@@ -8,11 +8,17 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="My Workout App")
 app.include_router(workout_router, tags=["Workouts"], prefix="/workouts")
 
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
 
 
 @app.get("/")
-async def welcome() -> dict:
+async def welcome():
     return FileResponse("./frontend/index.html")
 
 

@@ -53,3 +53,15 @@ async def delete_workout_by_exercise(
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f"The item with exercise={exercise} is not found",
     )
+
+
+@workout_router.put("/{exercise}")
+async def update_workout(workout: WorkoutRequest, exercise: str) -> dict:
+    for x in workout_list:
+        if x.exercise == exercise:
+            x.sets = workout.sets
+            x.reps = workout.reps
+            x.notes = workout.notes
+            return {"message": "Workout updated successfully"}
+
+    return {"message": f"The workout with exercise={exercise} is not found."}
