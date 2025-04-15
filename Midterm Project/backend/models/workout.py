@@ -1,7 +1,8 @@
+from beanie import Document
 from pydantic import BaseModel
 
 
-class Workout(BaseModel):
+class Workout(Document):
     exercise: str
     sets: str
     reps: str

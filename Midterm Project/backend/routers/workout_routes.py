@@ -1,6 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, HTTPException, status
-from workout import Workout, WorkoutRequest
+
+from models.workout import Workout, WorkoutRequest
 
 
 workout_router = APIRouter()
