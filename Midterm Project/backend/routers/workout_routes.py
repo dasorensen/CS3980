@@ -11,7 +11,7 @@ workout_list = []
 
 @workout_router.get("")
 async def get_workouts() -> list[Workout]:
-    return workout_list
+    return await Workout.find_all().to_list()
 
 
 @workout_router.post("", status_code=status.HTTP_201_CREATED)
@@ -22,7 +22,7 @@ async def add_workout(workout: WorkoutRequest) -> Workout:
         reps=workout.reps,
         notes=workout.notes,
     )
-    workout_list.append(newWorkout)
+    await Workout.insert_one(newWorkout)
     return newWorkout
 
 
@@ -30,9 +30,9 @@ async def add_workout(workout: WorkoutRequest) -> Workout:
 async def get_workout_by_exercise(
     exercise: Annotated[str, "Name of exercise"],
 ) -> Workout:
-    for workout in workout_list:
-        if workout.exercise == exercise:
-            return workout
+    workout = Workout.get(exercise)
+    if workout:
+        return workout
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,

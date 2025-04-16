@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from db.dbContext import init_database
 from routers.workout_routes import workout_router
 from fastapi.middleware.cors import CORSMiddleware
+from routers.user import user_router
 
 
 @asynccontextmanager
@@ -20,6 +21,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="My Workout App", version="2.0.0", lifespan=lifespan)
 app.include_router(workout_router, tags=["Workouts"], prefix="/workouts")
+app.include_router(user_router, tags=["Users"], prefix="/users")
 
 app.add_middleware(
     CORSMiddleware,
