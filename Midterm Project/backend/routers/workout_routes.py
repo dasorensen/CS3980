@@ -54,7 +54,9 @@ async def delete_workout_by_exercise(
     )
 
 
-@workout_router.put("/{exercise}")
+@workout_router.put(
+    "/{exercise}"
+)  # CAN USE MONGODB ID INSTEAD OF EXERCISE, MUCH BETTER
 async def update_workout(workout: WorkoutRequest, exercise: str) -> dict:
     existing_workout = await Workout.get(exercise)
     if existing_workout:
