@@ -8,6 +8,9 @@ class Workout(Document):
     reps: str
     notes: str
 
+    class Settings:
+        name = "workouts"
+
 
 class WorkoutRequest(BaseModel):
     exercise: str

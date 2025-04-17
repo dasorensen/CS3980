@@ -30,7 +30,7 @@ async def add_workout(workout: WorkoutRequest) -> Workout:
 async def get_workout_by_exercise(
     exercise: Annotated[str, "Name of exercise"],
 ) -> Workout:
-    workout = Workout.get(exercise)
+    workout = await Workout.get(exercise)
     if workout:
         return workout
 
@@ -44,11 +44,9 @@ async def get_workout_by_exercise(
 async def delete_workout_by_exercise(
     exercise: Annotated[str, "Name of exercise"],
 ) -> dict:
-    for i in range(len(workout_list)):
-        workout = workout_list[i]
-        if workout.exercise == exercise:
-            workout_list.pop(i)
-            return {"message": f"The item with exercise={exercise} is removed."}
+    workout = await Workout.get(exercise)
+    await workout.delete()
+    return {"message": f"The item with exercise={exercise} is removed."}
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -58,11 +56,13 @@ async def delete_workout_by_exercise(
 
 @workout_router.put("/{exercise}")
 async def update_workout(workout: WorkoutRequest, exercise: str) -> dict:
-    for x in workout_list:
-        if x.exercise == exercise:
-            x.sets = workout.sets
-            x.reps = workout.reps
-            x.notes = workout.notes
-            return {"message": "Workout updated successfully"}
+    existing_workout = await Workout.get(exercise)
+    if existing_workout:
+        existing_workout.exercise = workout.exercise
+        existing_workout.sets = workout.sets
+        existing_workout.reps = workout.reps
+        existing_workout.notes = workout.notes
+        await existing_workout.save()
+        return {"message": "Workout updated successfully"}
 
     return {"message": f"The workout with exercise={exercise} is not found."}
