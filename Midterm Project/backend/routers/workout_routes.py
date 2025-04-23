@@ -3,10 +3,7 @@ from fastapi import APIRouter, HTTPException, status
 
 from models.workout import Workout, WorkoutRequest
 
-
 workout_router = APIRouter()
-
-workout_list = []
 
 
 @workout_router.get("")
@@ -22,7 +19,7 @@ async def add_workout(workout: WorkoutRequest) -> Workout:
         reps=workout.reps,
         notes=workout.notes,
     )
-    await Workout.insert_one(newWorkout)
+    newWorkout = await Workout.insert_one(newWorkout)
     return newWorkout
 
 
@@ -30,7 +27,7 @@ async def add_workout(workout: WorkoutRequest) -> Workout:
 async def get_workout_by_exercise(
     exercise: Annotated[str, "Name of exercise"],
 ) -> Workout:
-    workout = await Workout.get(exercise)
+    workout = await Workout.find_one({"exercise": exercise})
     if workout:
         return workout
 
@@ -44,9 +41,10 @@ async def get_workout_by_exercise(
 async def delete_workout_by_exercise(
     exercise: Annotated[str, "Name of exercise"],
 ) -> dict:
-    workout = await Workout.get(exercise)
-    await workout.delete()
-    return {"message": f"The item with exercise={exercise} is removed."}
+    workout = await Workout.find_one({"exercise": exercise})
+    if workout:
+        await workout.delete()
+        return {"message": f"The workout is deleted"}
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -54,11 +52,9 @@ async def delete_workout_by_exercise(
     )
 
 
-@workout_router.put(
-    "/{exercise}"
-)  # CAN USE MONGODB ID INSTEAD OF EXERCISE, MUCH BETTER
+@workout_router.put("/{exercise}")
 async def update_workout(workout: WorkoutRequest, exercise: str) -> dict:
-    existing_workout = await Workout.get(exercise)
+    existing_workout = await Workout.find_one({"exercise": exercise})
     if existing_workout:
         existing_workout.exercise = workout.exercise
         existing_workout.sets = workout.sets

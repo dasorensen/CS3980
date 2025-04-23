@@ -83,16 +83,16 @@ const postWorkout = () => {
 
 
 
-const deleteWorkout = (exercise) => {
+const deleteWorkout = (id) => {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            data = data.filter((x) => x.exercise != exercise);
+            data = data.filter((x) => x.id != id);
             getWorkouts();
         }
     };
 
-    xhr.open('DELETE', `${api}/${exercise}`, true);
+    xhr.open('DELETE', `${api}/${id}`, true);
     xhr.send();
 };
 
@@ -109,7 +109,7 @@ const displayWorkouts = (workouts) => {
             <button onClick="tryEditWorkout('${x.exercise}')" type="button" data-bs-toggle="modal" data-bs-target="#modal-edit" class="btn btn-info">Edit</button>
             <td>
             <td>
-            <button onClick="deleteWorkout('${x.exercise}')" type="button" class="btn btn-danger">Delete</button>
+            <button onClick="deleteWorkout('${x.id}')" type="button" class="btn btn-danger">Delete</button>
             </td>
         </tr>`
     });

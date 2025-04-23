@@ -5,6 +5,13 @@ from pydantic import BaseModel
 from models.my_config import get_settings
 
 
+class LoginResult(BaseModel):
+    username: str
+    role: str
+    access_token: str
+    token_type: str = "bearer"
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
@@ -12,6 +19,7 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str
+    role: str
     exp_datetime: datetime
 
 
@@ -32,7 +40,10 @@ def decode_jwt_token(token: str) -> TokenData | None:
         key = get_settings().secret_key
         payload = jwt.decode(token, key, algorithms=[ALGORITHM])
         username: str = payload.get("username")
+        role: str = payload.get("role")
         exp: int = payload.get("exp")
-        return TokenData(username=username, exp_datetime=datetime.fromtimestamp(exp))
+        return TokenData(
+            username=username, role=role, exp_datetime=datetime.fromtimestamp(exp)
+        )
     except jwt.InvalidTokenError:
         print("Invalid JWT token.")
