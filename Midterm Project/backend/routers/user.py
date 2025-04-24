@@ -36,6 +36,7 @@ user_router = APIRouter()
 
 @user_router.post("/signup")
 async def sign_up(user: UserRequest):
+    print("Got to signup")
     existing_user = await User.find_one(User.username == user.username)
 
     if existing_user:
@@ -65,12 +66,13 @@ async def login_for_access_token(
     )
     if authenticated:
         access_token = create_access_token(
-            {"username": username, "role": existing_user.role}
+            {
+                "username": username,
+            }
         )
         return LoginResult(
             access_token=access_token,
             username=existing_user.username,
-            role=existing_user.role,
         )
 
     raise HTTPException(status_code=401, detail="Invalid username or password")

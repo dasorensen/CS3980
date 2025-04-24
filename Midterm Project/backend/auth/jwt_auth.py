@@ -7,7 +7,6 @@ from models.my_config import get_settings
 
 class LoginResult(BaseModel):
     username: str
-    role: str
     access_token: str
     token_type: str = "bearer"
 

@@ -8,6 +8,61 @@ let exerciseEditInput = document.getElementById('exercise-edit');
 let setsEditInput = document.getElementById('edit-sets');
 let repsEditInput = document.getElementById('edit-reps');
 let notesEditInput = document.getElementById('edit-notes');
+let signupUsernameInput = document.getElementById('signup-username')
+let signupEmailInput = document.getElementById('signup-email')
+let signupPasswordInput = document.getElementById('signup-password')
+let signinUsernameInput = document.getElementById('username')
+let signinPasswordInput = document.getElementById('password')
+let form = document.getElementById('form-signin');
+
+document.getElementById('signup-button').addEventListener('click', (e) => {
+    e.preventDefault();
+    signup();
+    const closeBtn = document.getElementById('signup-close');
+    closeBtn.click();
+    alert("User has been signed up");
+});
+
+const signup = () => {
+    const signupUsernameInput = document.getElementById('signup-username');
+    const username = signupUsernameInput.value;
+    const signupEmailInput = document.getElementById('signup-email');
+    const email = signupEmailInput.value;
+    const signupPasswordInput = document.getElementById('signup-password');
+    const password = signupPasswordInput.value;
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'http://127.0.0.1:8000/users/signup', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.send(JSON.stringify({username, email, password}));
+};
+
+document.getElementById('signin-button').addEventListener('click', (e) => {
+    e.preventDefault();
+    signin();
+    const closeBtn = document.getElementById('signin-close');
+    closeBtn.click();
+    alert("User has been signed in");
+});
+
+const signin = () => {
+    const signinUsernameInput = document.getElementById('username');
+    const username = signinUsernameInput.value;
+    const signinPasswordInput = document.getElementById('password');
+    const password = signinPasswordInput.value;
+
+    const xhr = new XMLHttpRequest();
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    console.log(formData);
+
+    xhr.open('POST', 'http://127.0.0.1:8000/users/sign-in', true);
+    xhr.send(formData);
+};
+
 
 document.getElementById('save-new-workout').addEventListener('click', (e) => {
     e.preventDefault();
@@ -36,6 +91,8 @@ document.getElementById('form-edit').addEventListener('submit', (e) => {
     }
     else {
         editWorkout(exerciseEditInput.value, setsEditInput.value, repsEditInput.value, notesEditInput.value);
+        const closeBtn = document.getElementById('edit-close');
+        closeBtn.click();
     }
 });
 

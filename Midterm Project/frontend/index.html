@@ -18,8 +18,11 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add New Exercise
 </button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-signup">
   Sign-up
+</button>
+<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-signin">
+  Sign-in
 </button>
 
 <!-- Modal -->
@@ -124,6 +127,111 @@ aria-hidden="true"
           </button>
           <button type="submit" id="edit" class="btn btn-primary">
             Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal  for signing up-->
+<div
+class="modal fade"
+id="modal-signup"
+tabindex="-1"
+aria-labelledby="modal-title"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">
+        Sign-up
+      </h4>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form id="form-signup">
+        <label for="signup-username">Username</label>
+        <input id="signup-username" type="text" class="form-control" name="" />
+        <div id="msg"></div>
+
+        <div class="mb-3">
+          <label for="signup-email" class="form-label"> Email </label>
+          <input type="int" class="form-control" id="signup-email"/>
+        </div>
+        <div class="mb-3">
+          <label for="signup-password" class="form-label"> Password </label>
+          <input type="int" class="form-control" id="signup-password"/>
+        </div>
+
+        <div class="mt-3">
+          <button
+            id="signup-close"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" id="signup-button" class="btn btn-success">
+            Sign-up
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal  for signing in-->
+<div
+class="modal fade"
+id="modal-signin"
+tabindex="-1"
+aria-labelledby="modal-title"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">
+        Sign-in
+      </h4>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form id="form-signin">
+        <label for="username">Username</label>
+        <input id="username" type="text" class="form-control" name="" />
+        <div id="msg"></div>
+        <div class="mb-3">
+          <label for="password" class="form-label"> Password </label>
+          <input type="int" class="form-control" id="password"/>
+        </div>
+
+        <div class="mt-3">
+          <button
+            id="signin-close"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" id="signin-button" class="btn btn-info">
+            Sign-in
           </button>
         </div>
       </form>
